@@ -10,7 +10,7 @@ from torchvision import datasets, transforms
 
 from torch.utils.tensorboard import SummaryWriter
 
-#for logging dta to tensorboard
+#for logging data to tensorboard
 writer = SummaryWriter("training_runs/mnist_digit_recog")
 
 
