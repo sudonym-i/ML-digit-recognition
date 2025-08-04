@@ -8,8 +8,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as func
 
+#uses class from "define.py"
 model = NeuralNet()  # Recreate the model instance
 
+# load previously saved model
 model.load_state_dict(torch.load('models/digit_recog.pth'))
 
 model.eval()  # Set to eval mode (disables dropout, etc.)

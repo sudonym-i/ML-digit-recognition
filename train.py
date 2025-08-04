@@ -9,12 +9,13 @@ import torch.nn.functional as func
 
 EPOCHS = 5
 
+#class from "define.py"
 model = NueralNet()
 
-# Use cross-entropy for classification
+# Using cross-entropy for classification
 criterion = nn.CrossEntropyLoss()
 
-# Use Adam optimizer
+# Using Adam optimizer
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 train_model(model, criterion, optimizer, EPOCHS)

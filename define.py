@@ -10,10 +10,11 @@ from torchvision import datasets, transforms
 
 from torch.utils.tensorboard import SummaryWriter
 
+#for logging dta to tensorboard
 writer = SummaryWriter("training_runs/mnist_digit_recog")
 
 
-
+# define model structure
 class NueralNet(nn.Module):
     def __init__(self):
         super().__init__()
@@ -21,7 +22,9 @@ class NueralNet(nn.Module):
         self.layer_1 = nn.Linear(28*28, 128)
         #output layer
         self.layer_2 = nn.Linear(128, 10)
-    
+
+
+    # make prediciton!
     def forward(self, x):
             #flatten down to one dimension, inferring batch size with -1
         x = x.view(-1, 28*28)
@@ -33,7 +36,8 @@ class NueralNet(nn.Module):
 
 
 def train_model(model, criterion, optimizer, num_epochs):
-    
+
+    #           no fancy transfroms yet
     transform = transforms.ToTensor()
 
     train_dataset = datasets.MNIST('./training_data', train=True, download=True, transform=transform)
@@ -42,23 +46,25 @@ def train_model(model, criterion, optimizer, num_epochs):
 
     for epoch in range(num_epochs):  # Train for x epochs
 
-        correct = 0
-        total = 0
-
         for batch_idx, (images, labels) in enumerate(train_loader):
         
             # Forward pass
             outputs = model(images)
+
             loss = criterion(outputs, labels)
 
-            # Backward pass and optimization
+            # clear
             optimizer.zero_grad()
+            # gradient
             loss.backward()
+            # update
             optimizer.step()
+
+            # this is just for modelling preformance
             if(torch.max(outputs, 1) == labels):
                 correct+=1
             total+=1
-
+        # log for tensorboard
         writer.add_scalar("Loss/train", loss.item() / len(train_loader), epoch)
         writer.add_scalar("Accuracy/train", correct / total, epoch)
 
