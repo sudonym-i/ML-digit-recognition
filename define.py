@@ -10,6 +10,9 @@ from torchvision import datasets, transforms
 
 from torch.utils.tensorboard import SummaryWriter
 
+#for logging data to tensorboard
+writer = SummaryWriter("training_runs/mnist_digit_recog")
+
 
 # define model structure
 class NueralNet(nn.Module):
