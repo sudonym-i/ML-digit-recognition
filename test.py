@@ -1,6 +1,6 @@
 
 from define import NueralNet
-from define import test_model
+from define_test import test_model
 
 import torch
 from torchvision import datasets, transforms

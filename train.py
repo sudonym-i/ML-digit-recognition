@@ -1,5 +1,5 @@
 from define import NueralNet
-from define import train_model
+from define_train import train_model
 
 import torch
 from torchvision import datasets, transforms
